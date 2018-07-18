@@ -1,6 +1,6 @@
 package models;
 
-import java.security.Timestamp;
+import java.sql.Timestamp;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -15,7 +15,7 @@ import javax.persistence.Table;
 @NamedQueries({
     @NamedQuery(
             name = "getAllTasks",
-            query = "SELECT t FROM Task AS t ORDER BY t.id DESC"
+            query = "SELECT m FROM Task AS m ORDER BY m.id DESC"
             )
 })
 @Table(name = "tasks")
@@ -78,4 +78,3 @@ public class Task {
         this.updated_at = updated_at;
     }
 }
-
