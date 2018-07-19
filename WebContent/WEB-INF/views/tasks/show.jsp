@@ -3,17 +3,42 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <c:import url="../layout/app.jsp">
     <c:param name="content">
-        <% request.setCharacterEncoding("UTF-8"); %>
+        <c:choose>
+            <c:when test="${task != null}">
+                <h2>id : ${task.id} のタスク詳細ページ</h2>
 
-        <h2>id : ${task.id} のタスク詳細ページ</h2>
+                <table>
+	                <tbody>
+		                <tr>
+			                <th>タイトル</th>
+			                <td><c:out value="${task.title}" /></td>
+		                </tr>
 
-        <p>タイトル：<c:out value="${task.title}" /></p>
-        <p>タスク詳細:<c:out value="${task.content}" /></p>
-        <p>作成日時:<fmt:formatDate value="${task.created_at}" pattern="yyyy-MM-dd HH:mm:ss" /></p>
-        <p>更新日時:<fmt:formatDate value="${task.updated_at}" pattern="yyyy-MM-dd HH:mm:ss" /></p>
+		                <tr>
+                            <th>詳細</th>
+                            <td><c:out value="${task.content}" /></td>
+                        </tr>
 
-        <p><a href="${pageContext.request.contextPath}/index">タスク一覧に戻る</a></p>
-        <p><a href="${pageContext.request.contextPath}/edit?id=${task.id}">このタスクを編集する</a></p>
+	                   <tr>
+                            <th>作成日時</th>
+                            <td><fmt:formatDate value="${task.created_at}" pattern="yyyy-MM-dd HH:mm:ss" /></td>
+                       </tr>
 
+                       <tr>
+                            <th>作成日時</th>
+                            <td><fmt:formatDate value="${mtask.updated_at}" pattern="yyyy-MM-dd HH:mm:ss" /></td>
+                       </tr>
+
+
+	                </tbody>
+	            </table>
+
+                <p><a href="${pageContext.request.contextPath}/index">タスク一覧に戻る</a></p>
+                <p><a href="${pageContext.request.contextPath}/edit?id=${task.id}">このタスクを編集する</a></p>
+            </c:when>
+            <c:otherwise>
+                <h2>お探しのデータは見つかりませんでした。</h2>
+            </c:otherwise>
+        </c:choose>
     </c:param>
 </c:import>
